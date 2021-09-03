@@ -88,6 +88,20 @@
       .start {
         box-shadow:0 0 9px rgba(0,0,0,.6);
       }
+      .textcontainer {
+        position:absolute;
+        left:0;
+        right:0;
+        bottom: 0;
+        top:200px;
+        font-size:40px;
+        text-align:center;
+        font-weight:bold;
+        display: none;
+        z-index: 100;
+        color: #eee;
+        text-shadow:0 0 6px rgba(0,0,0,.8);
+      }
 
       @keyframes runright {
         0%{
@@ -128,6 +142,7 @@
         <span class="hitungWaktu"></span>
         <span class="jumlahKlik"></span>
       </div>
+      <div class="textcontainer">MULAI!!!</div>
       <div class="sasuke" data-aos="zoom-in-down" data-aos-duration="3000"></div>
       <div class="targetcari"></div>
     </div>
@@ -151,21 +166,30 @@
         $('.hitungWaktu').hide();
         $('.jumlahKlik').hide();
         $('.mulai').on('click',function(){
-          waktu = 61;
+          waktu = 121;
           jumlahKlik = 0;
           $('.hitungWaktu').fadeIn();
           $('.jumlahKlik').fadeIn();
-          $('.hitungWaktu').text('Sisa Waktu : 60');
+          $('.hitungWaktu').text('Sisa Waktu : 120');
           $('.jumlahKlik').text('Hasil : 0');
+          $('.start').text('Sedang dalam game');
+          $('.start').removeClass('mulai');
+          $('.start').addClass('disabled');
+          $('.textcontainer').text('MULAI!!!');
+          $('.textcontainer').fadeIn();
           var setWaktu = setInterval(function(){
             waktu--;
             if(waktu >= 0){
-              $('.start').removeClass('mulai');
-              $('.start').addClass('disabled');
+              $('.textcontainer').fadeOut();
               $('.targetcari').show();
               $('.hitungWaktu').text('Sisa Waktu : '+waktu);
             }else{
               clearInterval(setWaktu);
+              $('.textcontainer').fadeIn();
+              $('.textcontainer').text('SELESAI!!!');
+              setTimeout(function() {
+                $('.textcontainer').fadeOut();
+              }, 800);
               $('.start').text('Ulangi');
               $('.start').addClass('mulai');
               $('.start').removeClass('disabled');
