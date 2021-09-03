@@ -61,6 +61,18 @@
         width:95px;
         box-shadow:0 0 9px rgba(0,0,0,.6);
       }
+      .targetcari {
+        width: 100px;
+        height: 100px;
+        border-radius:50%;
+        background-color: #e02b2b;
+        position: absolute;
+        opacity: 0;
+        box-shadow:0 0 9px rgba(0,0,0,.6);
+      }
+      .mulai {
+        box-shadow:0 0 9px rgba(0,0,0,.6);
+      }
 
       @keyframes runright {
         0%{
@@ -83,11 +95,15 @@
   <body>
 
     <div class="container text-center mt-4 mb-2">
-      <h4>Tugas Ahir</h4>
+      <h4 class="test">Tugas Ahir</h4>
     </div>
     <div class="container">
-    <div class="d-flex justify-content-between">
-      <span>Create by : Ketut Krisna</span>
+    <div class="d-flex justify-content-between" style="text-align: center;">
+      <div>
+        <button class="btn-sm btn btn-primary mulai mb-2">Mulai</button>
+      </div>
+      <div><span class="waktuHabis"></span><span class="hitungWaktu"></span></div>
+      <span class="jumlahKlik"></span>
       <select class="form-select form-select-sm mb-2 pilihTipe text-right" aria-label=".form-select-sm example">
         <option value="gerakLari">Lari</option>
         <option value="gerakLoncat">Loncat</option>
@@ -95,7 +111,12 @@
     </div>
     <div class="kotakpembatas">
       <div class="sasuke" data-aos="zoom-in-down" data-aos-duration="3000"></div>
+      <div class="targetcari"></div>
     </div>
+
+      <div class="row">
+      <span class="text-center">Create by : Ketut Krisna</span>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -106,6 +127,80 @@
     </script>
     <script>
       $(function(){
+        var jumlahKlik = 0;
+        $('.targetcari').hide();
+        $('.mulai').on('click',function(){
+
+              jumlahKlik=0;
+          $('.targetcari').show();
+          $('.mulai').hide();
+          $('.jumlahKlik').text('');
+          var waktu=60;
+          setInterval(function(){
+            waktu--;
+            if(waktu >= 0){
+              $('.waktuHabis').hide();
+              $('.targetcari').show();
+              $('.hitungWaktu').text(waktu);
+            }else{
+              $('.mulai').show();
+              $('.hitungWaktu').text('');
+              $('.waktuHabis').text('Waktu habis');
+              $('.targetcari').hide();
+            }
+          },1000);
+
+        });
+
+
+        $('.targetcari').on('mouseover',function(e){
+          $('.targetcari').css('opacity','1');
+          $('.targetcari').css('transition','1s');
+        });
+        $('.targetcari').on('mouseleave',function(e){
+          $('.targetcari').css('opacity','0');
+          $('.targetcari').css('transition','1s');
+        });
+
+        var horLine = $(".kotakpembatas").width();
+        var verLine = $(".kotakpembatas").height();
+        var randomWidth = Math.floor(Math.random() * (horLine-100));
+        var randomHeight = Math.floor(Math.random() * (verLine-100));
+        $('.targetcari').css({
+          'top':randomHeight,
+          'left':randomWidth
+        });
+
+        
+        $('.targetcari').on('click',function(e){
+          jumlahKlik++;
+          $('.jumlahKlik').text('Hasil '+jumlahKlik);
+          $('.targetcari').css('opacity','1');
+          $('.targetcari').css('transition','.4s');
+          setTimeout(function() {
+            $('.targetcari').css('opacity','0');
+            $('.targetcari').css({
+              'top':'0',
+              'left':'0',
+              'transition':'unset'
+            });
+          }, 500);
+          setTimeout(function() {
+            var horLine = $(".kotakpembatas").width();
+            var verLine = $(".kotakpembatas").height();
+            var randomWidth = Math.floor(Math.random() * (horLine-50));
+            var randomHeight = Math.floor(Math.random() * (verLine-50));
+            $('.targetcari').css('transform','translate('+ randomWidth +'px ,'+ randomHeight +'px)');
+          }, 600);
+          
+        });
+        // $('.targetcari').on('click',function(){
+        //   jumlahKlik++;
+        //   $('.jumlahKlik').text(jumlahKlik);
+        // })
+
+
+        
 
         var posAwal=0;
         var posAwalY=0;
