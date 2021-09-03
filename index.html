@@ -73,6 +73,21 @@
       .mulai {
         box-shadow:0 0 9px rgba(0,0,0,.6);
       }
+      .pembungkustimeklik {
+        position:absolute;
+        top:10px;
+        left:5px;
+      }
+      .hitungWaktu, .jumlahKlik {
+        padding:5px 7px 5px 7px;
+        background-color:rgba(255,255,255,.6);
+        box-shadow:0 0 4px rgba(0,0,0,.5);
+        border-radius:5px;
+        font-size: 17px;
+      }
+      .start {
+        box-shadow:0 0 9px rgba(0,0,0,.6);
+      }
 
       @keyframes runright {
         0%{
@@ -95,21 +110,24 @@
   <body>
 
     <div class="container text-center mt-4 mb-2">
-      <h4 class="test">Tugas Ahir</h4>
+      <h4>Tugas Ahir</h4>
     </div>
     <div class="container">
     <div class="d-flex justify-content-between" style="text-align: center;">
       <div>
-        <button class="btn-sm btn btn-primary mulai mb-2">Mulai</button>
+        <button class="btn-sm btn btn-primary start mulai mb-2">Mulai</button>
       </div>
-      <div><span class="waktuHabis"></span><span class="hitungWaktu"></span></div>
-      <span class="jumlahKlik"></span>
+      
       <select class="form-select form-select-sm mb-2 pilihTipe text-right" aria-label=".form-select-sm example">
         <option value="gerakLari">Lari</option>
         <option value="gerakLoncat">Loncat</option>
       </select>
     </div>
     <div class="kotakpembatas">
+      <div class="pembungkustimeklik">
+        <span class="hitungWaktu"></span>
+        <span class="jumlahKlik"></span>
+      </div>
       <div class="sasuke" data-aos="zoom-in-down" data-aos-duration="3000"></div>
       <div class="targetcari"></div>
     </div>
@@ -127,25 +145,31 @@
     </script>
     <script>
       $(function(){
+
         var jumlahKlik = 0;
         $('.targetcari').hide();
+        $('.hitungWaktu').hide();
+        $('.jumlahKlik').hide();
         $('.mulai').on('click',function(){
-
-              jumlahKlik=0;
-          $('.targetcari').show();
-          $('.mulai').hide();
-          $('.jumlahKlik').text('');
-          var waktu=60;
-          setInterval(function(){
+          waktu = 61;
+          jumlahKlik = 0;
+          $('.hitungWaktu').fadeIn();
+          $('.jumlahKlik').fadeIn();
+          $('.hitungWaktu').text('Sisa Waktu : 60');
+          $('.jumlahKlik').text('Hasil : 0');
+          var setWaktu = setInterval(function(){
             waktu--;
             if(waktu >= 0){
-              $('.waktuHabis').hide();
+              $('.start').removeClass('mulai');
+              $('.start').addClass('disabled');
               $('.targetcari').show();
-              $('.hitungWaktu').text(waktu);
+              $('.hitungWaktu').text('Sisa Waktu : '+waktu);
             }else{
-              $('.mulai').show();
-              $('.hitungWaktu').text('');
-              $('.waktuHabis').text('Waktu habis');
+              clearInterval(setWaktu);
+              $('.start').text('Ulangi');
+              $('.start').addClass('mulai');
+              $('.start').removeClass('disabled');
+              $('.hitungWaktu').text('Sisa Waktu : Habis!');
               $('.targetcari').hide();
             }
           },1000);
@@ -174,7 +198,7 @@
         
         $('.targetcari').on('click',function(e){
           jumlahKlik++;
-          $('.jumlahKlik').text('Hasil '+jumlahKlik);
+          $('.jumlahKlik').text('Hasil : '+jumlahKlik);
           $('.targetcari').css('opacity','1');
           $('.targetcari').css('transition','.4s');
           setTimeout(function() {
@@ -194,10 +218,6 @@
           }, 600);
           
         });
-        // $('.targetcari').on('click',function(){
-        //   jumlahKlik++;
-        //   $('.jumlahKlik').text(jumlahKlik);
-        // })
 
 
         
