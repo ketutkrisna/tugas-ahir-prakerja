@@ -166,11 +166,43 @@
         <button class="btn-sm btn btn-primary start mulai mb-2">Mulai</button>
       </div>
       
-      <select class="form-select form-select-sm mb-2 pilihTipe text-right" aria-label=".form-select-sm example">
-        <option value="gerakLari">Lari</option>
-        <option value="gerakLoncat">Loncat</option>
-      </select>
+      
+
+
+      <div class="btn-group">
+        <button type="button" style="box-shadow:0 0 9px rgba(0,0,0,.6)" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Settings
+        </button>
+        <ul class="dropdown-menu" style="border-radius:10px;box-shadow:0 0 8px rgba(0,0,0,.5)">
+          <li><a class="dropdown-item" href="#">
+            Atur waktu
+            <select style="width:100%" class="form-select form-select-sm pilihMenit text-right" aria-label=".form-select-sm example">
+              <option value="16">15 Detik</option>
+              <option value="31">30 Detik</option>
+              <option selected value="61">1 Menit</option>
+              <option value="121">2 Menit</option>
+              <option value="181">3 Menit</option>
+              <option value="241">4 Menit</option>
+              <option value="301">5 Menit</option>
+              <option value="361">6 Menit</option>
+              <option value="421">7 Menit</option>
+              <option value="481">8 Menit</option>
+              <option value="541">9 Menit</option>
+              <option value="601">10 Menit</option>
+            </select>
+          </a></li>
+          <li><a class="dropdown-item" href="#">
+            Atur Gerakan
+            <select style="width:100%" class="form-select form-select-sm pilihTipe text-right" aria-label=".form-select-sm example">
+              <option value="gerakLari">Lari</option>
+              <option value="gerakLoncat">Loncat</option>
+            </select>
+          </a></li>
+        </ul>
+      </div>
+
     </div>
+
     <div class="kotakpembatas">
       <div class="pembungkustimeklik">
         <span class="hitungWaktu"></span>
@@ -207,11 +239,18 @@
         $('.hitungWaktu').hide();
         $('.jumlahKlik').hide();
 
+        var waktu = $('.pilihMenit').val();
+        $('.pilihMenit').on('change',function(){
+          waktu=$('.pilihMenit').val();
+          $('.hitungWaktu').text('Sisa Waktu : '+(waktu)+' detik');
+        });
+
         $('.mulai').on('click',function(){
 
           jumlahKlik=0;
 
 
+          $('.pilihMenit').attr('disabled','of');
           setTimeout(function() {
           var uang25rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
           var uang50rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
@@ -233,10 +272,9 @@
           $('.targetcari').html(daftarUang[uangRandom]);
           }, 100);
 
-          waktu = 15;
           $('.hitungWaktu').fadeIn();
           $('.jumlahKlik').fadeIn();
-          $('.hitungWaktu').text('Sisa Waktu : 120');
+          $('.hitungWaktu').text('Sisa Waktu : ');
           $('.jumlahKlik').text('Hasil : Rp 0');
           $('.start').text('Sedang dalam game');
           $('.start').removeClass('mulai');
@@ -248,9 +286,9 @@
             if(waktu > 10){
               $('.textcontainer').fadeOut();
               $('.targetcari').show();
-              $('.hitungWaktu').text('Sisa Waktu : '+waktu);
+              $('.hitungWaktu').text('Sisa Waktu : '+waktu+' detik');
             }else if(waktu < 11 && waktu >=0){
-              $('.hitungWaktu').html('Sisa Waktu : <span style="color:red;font-weight:bold;">'+waktu+'</span>');
+              $('.hitungWaktu').html('Sisa Waktu : <span style="color:red;font-weight:bold;">'+waktu+' detik</span>');
             }else{
               clearInterval(setWaktu);
               $('.textcontainer').fadeIn();
@@ -261,6 +299,7 @@
               $('.start').text('Ulangi');
               $('.start').addClass('mulai');
               $('.start').removeClass('disabled');
+              $('.pilihMenit').removeAttr('disabled');
               $('.hitungWaktu').html('Sisa Waktu : <span style="color:red;font-weight:bold;">Habis!</span>');
               $('.targetcari').hide();
             }
