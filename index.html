@@ -246,7 +246,7 @@
         });
 
         $('.mulai').on('click',function(){
-
+          waktu = $('.pilihMenit').val();
           jumlahKlik=0;
 
 
@@ -335,7 +335,7 @@
             var randomWidth = Math.floor(Math.random() * (horLine-100));
             var randomHeight = Math.floor(Math.random() * (verLine-100));
             $('.targetcari').css('transform','translate('+ randomWidth +'px ,'+ randomHeight +'px)');
-          }, 2500);
+          }, 2300);
           setTimeout(function() {
             $('.kotakpembatas').css("pointer-events", "auto");
             var uang25rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
