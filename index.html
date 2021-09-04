@@ -253,20 +253,29 @@
           $('.pilihMenit').attr('disabled','of');
           setTimeout(function() {
           var uang25rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
+          var uang25rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
+          var uang25rp2 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
           var uang50rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
+          var uang50rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
           var uang100rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100"><img src="img/100rp.png" width="50" height="50"></div>';
+          var uang100rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100"><img src="img/100rp.png" width="50" height="50"></div>';
           var uang1rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="1000"><img src="img/1rb.png" width="100%"></div>';
+          var uang1rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="1000"><img src="img/1rb.png" width="100%"></div>';
           var uang2rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="2000"><img src="img/2rb.png" width="100%"></div>';
+          var uang2rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="2000"><img src="img/2rb.png" width="100%"></div>';
           var uang5rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="5000"><img src="img/5rb.png" width="100%"></div>';
+          var uang5rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="5000"><img src="img/5rb.png" width="100%"></div>';
           var uang10rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="10000"><img src="img/10rb.png" width="100%"></div>';
+          var uang10rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="10000"><img src="img/10rb.png" width="100%"></div>';
           var uang20rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="20000"><img src="img/20rb.png" width="100%"></div>';
+          var uang20rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="20000"><img src="img/20rb.png" width="100%"></div>';
           var uang50rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50000"><img src="img/50rb.png" width="100%"></div>';
           var uang75rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="75000"><img src="img/75rb.png" width="100%"></div>';
           var uang100rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100000"><img src="img/100rb.png" width="100%"></div>';
 
-          var daftarUang = [uang25rp, uang50rp, uang100rp, uang1rb, uang2rb, uang5rb, uang10rb, uang20rb, uang50rb, uang75rb, uang100rb];
-          var valueUang = [25, 50, 100, 1000, 2000, 5000, 10000, 20000, 50000, 75000, 100000];
-          var uangRandom = Math.floor(Math.random() * 11);
+          var daftarUang = [uang5rb, uang25rp, uang10rb, uang25rp2, uang50rp, uang75rb, uang50rp1, uang100rp, uang1rb, uang20rb, uang1rb1, uang2rb, uang5rb1, uang2rb1, uang10rb1, uang20rb1, uang50rb, uang100rb, uang25rp1, uang100rp1];
+          var valueUang = [5000, 25, 10000, 25, 50, 75000, 50, 100, 1000, 20000, 1000, 2000, 5000, 2000, 10000, 20000, 50000, 100000, 25, 100];
+          var uangRandom = Math.floor(Math.random() * 20);
 
           var jumlahKlik = valueUang[uangRandom];
           $('.targetcari').html(daftarUang[uangRandom]);
@@ -339,20 +348,29 @@
           setTimeout(function() {
             $('.kotakpembatas').css("pointer-events", "auto");
             var uang25rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
-            var uang50rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
-            var uang100rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100"><img src="img/100rp.png" width="50" height="50"></div>';
-            var uang1rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="1000"><img src="img/1rb.png" width="100%"></div>';
-            var uang2rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="2000"><img src="img/2rb.png" width="100%"></div>';
-            var uang5rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="5000"><img src="img/5rb.png" width="100%"></div>';
-            var uang10rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="10000"><img src="img/10rb.png" width="100%"></div>';
-            var uang20rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="20000"><img src="img/20rb.png" width="100%"></div>';
-            var uang50rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50000"><img src="img/50rb.png" width="100%"></div>';
-            var uang75rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="75000"><img src="img/75rb.png" width="100%"></div>';
-            var uang100rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100000"><img src="img/100rb.png" width="100%"></div>';
+          var uang25rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
+          var uang25rp2 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
+          var uang50rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
+          var uang50rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
+          var uang100rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100"><img src="img/100rp.png" width="50" height="50"></div>';
+          var uang100rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100"><img src="img/100rp.png" width="50" height="50"></div>';
+          var uang1rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="1000"><img src="img/1rb.png" width="100%"></div>';
+          var uang1rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="1000"><img src="img/1rb.png" width="100%"></div>';
+          var uang2rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="2000"><img src="img/2rb.png" width="100%"></div>';
+          var uang2rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="2000"><img src="img/2rb.png" width="100%"></div>';
+          var uang5rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="5000"><img src="img/5rb.png" width="100%"></div>';
+          var uang5rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="5000"><img src="img/5rb.png" width="100%"></div>';
+          var uang10rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="10000"><img src="img/10rb.png" width="100%"></div>';
+          var uang10rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="10000"><img src="img/10rb.png" width="100%"></div>';
+          var uang20rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="20000"><img src="img/20rb.png" width="100%"></div>';
+          var uang20rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="20000"><img src="img/20rb.png" width="100%"></div>';
+          var uang50rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50000"><img src="img/50rb.png" width="100%"></div>';
+          var uang75rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="75000"><img src="img/75rb.png" width="100%"></div>';
+          var uang100rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100000"><img src="img/100rb.png" width="100%"></div>';
 
-            var daftarUang = [uang25rp, uang50rp, uang100rp, uang1rb, uang2rb, uang5rb, uang10rb, uang20rb, uang50rb, uang75rb, uang100rb];
-            var valueUang = [25, 50, 100, 1000, 2000, 5000, 10000, 20000, 50000, 75000, 100000];
-            var uangRandom = Math.floor(Math.random() * 11);
+          var daftarUang = [uang5rb, uang25rp, uang10rb, uang25rp2, uang50rp, uang75rb, uang50rp1, uang100rp, uang1rb, uang20rb, uang1rb1, uang2rb, uang5rb1, uang2rb1, uang10rb1, uang20rb1, uang50rb, uang100rb, uang25rp1, uang100rp1];
+          var valueUang = [5000, 25, 10000, 25, 50, 75000, 50, 100, 1000, 20000, 1000, 2000, 5000, 2000, 10000, 20000, 50000, 100000, 25, 100];
+          var uangRandom = Math.floor(Math.random() * 20);
 
             var pickUang = Number($('.es').val());
             $('.targetcari').html(daftarUang[uangRandom]);
