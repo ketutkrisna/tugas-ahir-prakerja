@@ -10,9 +10,18 @@
       body {
         overflow: hidden;
       }
+      .stopklik {
+        width: 100%;
+        height: 75vh;
+        background:linear-gradient(#eee,#bbb);
+        cursor:pointer;
+        box-shadow:0 0 9px rgba(0,0,0,.8);
+        border-radius:10px;
+        position:relative;
+      }
       .kotakpembatas {
         width: 100%;
-        height: 80vh;
+        height: 75vh;
         background:linear-gradient(#eee,#bbb);
         cursor:pointer;
         box-shadow:0 0 9px rgba(0,0,0,.8);
@@ -62,28 +71,53 @@
         box-shadow:0 0 9px rgba(0,0,0,.6);
       }
       .targetcari {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
         border-radius:50%;
-        background-color: #e02b2b;
+        /*background-color: #e02b2b;*/
         position: absolute;
         opacity: 0;
-        box-shadow:0 0 9px rgba(0,0,0,.6);
+        /*box-shadow:0 0 9px rgba(0,0,0,.6);*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .3s;
+        padding:0;
+      }
+      .targetcariklik {
+        /*background-color: #e02b2b;*/
+        opacity: 1;
+        transition: .3s;
+        transform : scale(1.1);
+        padding:0;
+        /*box-shadow:0 0 9px rgba(0,0,0,.6);*/
+      }
+      .targetcari:hover {
+        width: 90px;
+        height: 90px;
+        border-radius:50%;
+        /*background-color: #e02b2b;*/
+        position: absolute;
+        opacity: 1;
+        transition: .3s;
+        /*box-shadow:0 0 9px rgba(0,0,0,.6);*/
+        transform : scale(1.2);
+        padding:0;
       }
       .mulai {
         box-shadow:0 0 9px rgba(0,0,0,.6);
       }
       .pembungkustimeklik {
         position:absolute;
-        top:10px;
-        left:5px;
+        top:11px;
       }
       .hitungWaktu, .jumlahKlik {
-        padding:5px 7px 5px 7px;
+        padding:6px 9px 6px 9px;
         background-color:rgba(255,255,255,.6);
-        box-shadow:0 0 4px rgba(0,0,0,.5);
+        box-shadow: inset 3px 3px 4px rgba(0,0,0,.6);
         border-radius:5px;
         font-size: 17px;
+        margin-left: 7px;
       }
       .start {
         box-shadow:0 0 9px rgba(0,0,0,.6);
@@ -161,17 +195,49 @@
     <script>
       $(function(){
 
+        function rubah(angka){
+         var reverse = angka.toString().split('').reverse().join(''),
+         ribuan = reverse.match(/\d{1,3}/g);
+         ribuan = ribuan.join('.').split('').reverse().join('');
+         return ribuan;
+        }
+
         var jumlahKlik = 0;
         $('.targetcari').hide();
         $('.hitungWaktu').hide();
         $('.jumlahKlik').hide();
+
         $('.mulai').on('click',function(){
-          waktu = 121;
-          jumlahKlik = 0;
+
+          jumlahKlik=0;
+
+
+          setTimeout(function() {
+          var uang25rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
+          var uang50rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
+          var uang100rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100"><img src="img/100rp.png" width="50" height="50"></div>';
+          var uang1rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="1000"><img src="img/1rb.png" width="100%"></div>';
+          var uang2rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="2000"><img src="img/2rb.png" width="100%"></div>';
+          var uang5rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="5000"><img src="img/5rb.png" width="100%"></div>';
+          var uang10rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="10000"><img src="img/10rb.png" width="100%"></div>';
+          var uang20rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="20000"><img src="img/20rb.png" width="100%"></div>';
+          var uang50rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50000"><img src="img/50rb.png" width="100%"></div>';
+          var uang75rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="75000"><img src="img/75rb.png" width="100%"></div>';
+          var uang100rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100000"><img src="img/100rb.png" width="100%"></div>';
+
+          var daftarUang = [uang25rp, uang50rp, uang100rp, uang1rb, uang2rb, uang5rb, uang10rb, uang20rb, uang50rb, uang75rb, uang100rb];
+          var valueUang = [25, 50, 100, 1000, 2000, 5000, 10000, 20000, 50000, 75000, 100000];
+          var uangRandom = Math.floor(Math.random() * 11);
+
+          var jumlahKlik = valueUang[uangRandom];
+          $('.targetcari').html(daftarUang[uangRandom]);
+          }, 100);
+
+          waktu = 15;
           $('.hitungWaktu').fadeIn();
           $('.jumlahKlik').fadeIn();
           $('.hitungWaktu').text('Sisa Waktu : 120');
-          $('.jumlahKlik').text('Hasil : 0');
+          $('.jumlahKlik').text('Hasil : Rp 0');
           $('.start').text('Sedang dalam game');
           $('.start').removeClass('mulai');
           $('.start').addClass('disabled');
@@ -179,10 +245,12 @@
           $('.textcontainer').fadeIn();
           var setWaktu = setInterval(function(){
             waktu--;
-            if(waktu >= 0){
+            if(waktu > 10){
               $('.textcontainer').fadeOut();
               $('.targetcari').show();
               $('.hitungWaktu').text('Sisa Waktu : '+waktu);
+            }else if(waktu < 11 && waktu >=0){
+              $('.hitungWaktu').html('Sisa Waktu : <span style="color:red;font-weight:bold;">'+waktu+'</span>');
             }else{
               clearInterval(setWaktu);
               $('.textcontainer').fadeIn();
@@ -193,22 +261,13 @@
               $('.start').text('Ulangi');
               $('.start').addClass('mulai');
               $('.start').removeClass('disabled');
-              $('.hitungWaktu').text('Sisa Waktu : Habis!');
+              $('.hitungWaktu').html('Sisa Waktu : <span style="color:red;font-weight:bold;">Habis!</span>');
               $('.targetcari').hide();
             }
           },1000);
 
         });
 
-
-        $('.targetcari').on('mouseover',function(e){
-          $('.targetcari').css('opacity','1');
-          $('.targetcari').css('transition','1s');
-        });
-        $('.targetcari').on('mouseleave',function(e){
-          $('.targetcari').css('opacity','0');
-          $('.targetcari').css('transition','1s');
-        });
 
         var horLine = $(".kotakpembatas").width();
         var verLine = $(".kotakpembatas").height();
@@ -219,27 +278,48 @@
           'left':randomWidth
         });
 
-        
+
+        var klick = 0;
         $('.targetcari').on('click',function(e){
-          jumlahKlik++;
-          $('.jumlahKlik').text('Hasil : '+jumlahKlik);
-          $('.targetcari').css('opacity','1');
-          $('.targetcari').css('transition','.4s');
+          klick++;
+          $('.targetcari').addClass('targetcariklik');
+          $('.kotakpembatas').css("pointer-events", "none");
           setTimeout(function() {
-            $('.targetcari').css('opacity','0');
             $('.targetcari').css({
               'top':'0',
               'left':'0',
               'transition':'unset'
             });
-          }, 500);
-          setTimeout(function() {
+            $('.targetcari').removeClass('targetcariklik');
             var horLine = $(".kotakpembatas").width();
             var verLine = $(".kotakpembatas").height();
-            var randomWidth = Math.floor(Math.random() * (horLine-50));
-            var randomHeight = Math.floor(Math.random() * (verLine-50));
+            var randomWidth = Math.floor(Math.random() * (horLine-100));
+            var randomHeight = Math.floor(Math.random() * (verLine-100));
             $('.targetcari').css('transform','translate('+ randomWidth +'px ,'+ randomHeight +'px)');
-          }, 600);
+          }, 2500);
+          setTimeout(function() {
+            $('.kotakpembatas').css("pointer-events", "auto");
+            var uang25rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
+            var uang50rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
+            var uang100rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100"><img src="img/100rp.png" width="50" height="50"></div>';
+            var uang1rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="1000"><img src="img/1rb.png" width="100%"></div>';
+            var uang2rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="2000"><img src="img/2rb.png" width="100%"></div>';
+            var uang5rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="5000"><img src="img/5rb.png" width="100%"></div>';
+            var uang10rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="10000"><img src="img/10rb.png" width="100%"></div>';
+            var uang20rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="20000"><img src="img/20rb.png" width="100%"></div>';
+            var uang50rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50000"><img src="img/50rb.png" width="100%"></div>';
+            var uang75rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="75000"><img src="img/75rb.png" width="100%"></div>';
+            var uang100rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100000"><img src="img/100rb.png" width="100%"></div>';
+
+            var daftarUang = [uang25rp, uang50rp, uang100rp, uang1rb, uang2rb, uang5rb, uang10rb, uang20rb, uang50rb, uang75rb, uang100rb];
+            var valueUang = [25, 50, 100, 1000, 2000, 5000, 10000, 20000, 50000, 75000, 100000];
+            var uangRandom = Math.floor(Math.random() * 11);
+
+            var pickUang = Number($('.es').val());
+            $('.targetcari').html(daftarUang[uangRandom]);
+            $('.jumlahKlik').html('Hasil : Rp <span style="color:green;font-weight:bold;">'+ (rubah(jumlahKlik = jumlahKlik + pickUang))+'</span>');
+            $('.targetcari').css('transition','.3s');
+          }, 2600);
           
         });
 
