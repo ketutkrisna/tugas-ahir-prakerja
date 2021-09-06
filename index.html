@@ -99,7 +99,7 @@
         /*background-color: #e02b2b;*/
         position: absolute;
         opacity: 1;
-        transition: .3s;
+        transition: .2s;
         /*box-shadow:0 0 9px rgba(0,0,0,.6);*/
         transform : scale(1.2);
         padding:0;
@@ -177,18 +177,18 @@
           <li><a class="dropdown-item" href="#">
             Atur waktu
             <select style="width:100%" class="form-select form-select-sm pilihMenit text-right" aria-label=".form-select-sm example">
-              <option value="16">15 Detik</option>
-              <option value="31">30 Detik</option>
-              <option selected value="61">1 Menit</option>
-              <option value="121">2 Menit</option>
-              <option value="181">3 Menit</option>
-              <option value="241">4 Menit</option>
-              <option value="301">5 Menit</option>
-              <option value="361">6 Menit</option>
-              <option value="421">7 Menit</option>
-              <option value="481">8 Menit</option>
-              <option value="541">9 Menit</option>
-              <option value="601">10 Menit</option>
+              <option value="15">15 Detik</option>
+              <option value="30">30 Detik</option>
+              <option selected value="60">1 Menit</option>
+              <option value="120">2 Menit</option>
+              <option value="180">3 Menit</option>
+              <option value="240">4 Menit</option>
+              <option value="300">5 Menit</option>
+              <option value="360">6 Menit</option>
+              <option value="420">7 Menit</option>
+              <option value="480">8 Menit</option>
+              <option value="540">9 Menit</option>
+              <option value="600">10 Menit</option>
             </select>
           </a></li>
           <li><a class="dropdown-item" href="#">
@@ -233,16 +233,17 @@
          ribuan = ribuan.join('.').split('').reverse().join('');
          return ribuan;
         }
+        // console.clear();
 
         var jumlahKlik = 0;
-        $('.targetcari').hide();
-        $('.hitungWaktu').hide();
-        $('.jumlahKlik').hide();
-
         var waktu = $('.pilihMenit').val();
+        $('.targetcari').hide();
+        $('.hitungWaktu').text('Waktu : '+waktu+' detik');
+        $('.jumlahKlik').text('Hasil : Rp 0');
+
         $('.pilihMenit').on('change',function(){
           waktu=$('.pilihMenit').val();
-          $('.hitungWaktu').text('Sisa Waktu : '+(waktu)+' detik');
+          $('.hitungWaktu').text('Waktu : '+(waktu)+' detik');
         });
 
         $('.mulai').on('click',function(){
@@ -283,22 +284,64 @@
 
           $('.hitungWaktu').fadeIn();
           $('.jumlahKlik').fadeIn();
-          $('.hitungWaktu').text('Sisa Waktu : ');
+          $('.hitungWaktu').text('Waktu : '+waktu+' detik');
           $('.jumlahKlik').text('Hasil : Rp 0');
           $('.start').text('Sedang dalam game');
           $('.start').removeClass('mulai');
           $('.start').addClass('disabled');
           $('.textcontainer').text('MULAI!!!');
           $('.textcontainer').fadeIn();
+
+
+
+          // var jam=new Date().getTime();
+          // var timejs=jam.toString().substring(0,jam.toString().length-3);
+
+          // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          // console.log(timejs);
+
+
+           
+          // var setDetik = 61;
+          // var minWaktu = 0;
           var setWaktu = setInterval(function(){
             waktu--;
+            // setDetik--;
+            // var infomenit = Math.floor(waktu / 60);
+            // var infowaktu;
+            // if(waktu < 60){
+            //   infowaktu = '';
+            //   infomenit = '';
+            //   setDetik = waktu;
+            // }else if(waktu >= 60 && waktu <= 3600){
+            //   infowaktu = 'menit';
+            //   infomenit = Math.floor(waktu / 60);
+            //   if(setDetik <= 1){
+            //     minWaktu=minWaktu+1;
+            //     console.log(minWaktu);
+            //     setDetik = 60 + minWaktu;
+            //     console.log(setDetik);
+            //   }else{
+            //   }
+            // }
+
+            
+            // if(infomenit == 0){
+              
+            // }else{
+            //   infomenit = '';
+            // }
+
             if(waktu > 10){
               $('.textcontainer').fadeOut();
               $('.targetcari').show();
-              $('.hitungWaktu').text('Sisa Waktu : '+waktu+' detik');
+              // $('.hitungWaktu').text('Waktu : '+infomenit+' '+infowaktu+' '+setDetik+' detik');
+              $('.hitungWaktu').text('Waktu : '+waktu+' detik');
             }else if(waktu < 11 && waktu >=0){
-              $('.hitungWaktu').html('Sisa Waktu : <span style="color:red;font-weight:bold;">'+waktu+' detik</span>');
+              $('.hitungWaktu').html('Waktu : <span style="color:red;font-weight:bold;">'+waktu+' detik</span>');
             }else{
+              // clearInterval(detikRun);
               clearInterval(setWaktu);
               $('.textcontainer').fadeIn();
               $('.textcontainer').text('SELESAI!!!');
@@ -309,7 +352,7 @@
               $('.start').addClass('mulai');
               $('.start').removeClass('disabled');
               $('.pilihMenit').removeAttr('disabled');
-              $('.hitungWaktu').html('Sisa Waktu : <span style="color:red;font-weight:bold;">Habis!</span>');
+              $('.hitungWaktu').html('Waktu : <span style="color:red;font-weight:bold;">Habis!</span>');
               $('.targetcari').hide();
             }
           },1000);
@@ -343,39 +386,44 @@
             var verLine = $(".kotakpembatas").height();
             var randomWidth = Math.floor(Math.random() * (horLine-100));
             var randomHeight = Math.floor(Math.random() * (verLine-100));
-            $('.targetcari').css('transform','translate('+ randomWidth +'px ,'+ randomHeight +'px)');
-          }, 2300);
-          setTimeout(function() {
-            $('.kotakpembatas').css("pointer-events", "auto");
+            
+            $('.targetcari').css({
+              'top': randomHeight,
+              'left': randomWidth,
+            });
+            // $('.targetcari').css('transform','translate('+ randomWidth +'px ,'+ randomHeight +'px)');
             var uang25rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
-          var uang25rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
-          var uang25rp2 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
-          var uang50rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
-          var uang50rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
-          var uang100rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100"><img src="img/100rp.png" width="50" height="50"></div>';
-          var uang100rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100"><img src="img/100rp.png" width="50" height="50"></div>';
-          var uang1rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="1000"><img src="img/1rb.png" width="100%"></div>';
-          var uang1rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="1000"><img src="img/1rb.png" width="100%"></div>';
-          var uang2rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="2000"><img src="img/2rb.png" width="100%"></div>';
-          var uang2rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="2000"><img src="img/2rb.png" width="100%"></div>';
-          var uang5rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="5000"><img src="img/5rb.png" width="100%"></div>';
-          var uang5rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="5000"><img src="img/5rb.png" width="100%"></div>';
-          var uang10rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="10000"><img src="img/10rb.png" width="100%"></div>';
-          var uang10rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="10000"><img src="img/10rb.png" width="100%"></div>';
-          var uang20rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="20000"><img src="img/20rb.png" width="100%"></div>';
-          var uang20rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="20000"><img src="img/20rb.png" width="100%"></div>';
-          var uang50rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50000"><img src="img/50rb.png" width="100%"></div>';
-          var uang75rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="75000"><img src="img/75rb.png" width="100%"></div>';
-          var uang100rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100000"><img src="img/100rb.png" width="100%"></div>';
+            var uang25rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
+            var uang25rp2 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="25"><img src="img/25rp.png" width="50" height="50"></div>';
+            var uang50rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
+            var uang50rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50"><img src="img/50rp.png" width="50" height="50"></div>';
+            var uang100rp = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100"><img src="img/100rp.png" width="50" height="50"></div>';
+            var uang100rp1 = '<div style="border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100"><img src="img/100rp.png" width="50" height="50"></div>';
+            var uang1rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="1000"><img src="img/1rb.png" width="100%"></div>';
+            var uang1rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="1000"><img src="img/1rb.png" width="100%"></div>';
+            var uang2rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="2000"><img src="img/2rb.png" width="100%"></div>';
+            var uang2rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="2000"><img src="img/2rb.png" width="100%"></div>';
+            var uang5rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="5000"><img src="img/5rb.png" width="100%"></div>';
+            var uang5rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="5000"><img src="img/5rb.png" width="100%"></div>';
+            var uang10rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="10000"><img src="img/10rb.png" width="100%"></div>';
+            var uang10rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="10000"><img src="img/10rb.png" width="100%"></div>';
+            var uang20rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="20000"><img src="img/20rb.png" width="100%"></div>';
+            var uang20rb1 = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="20000"><img src="img/20rb.png" width="100%"></div>';
+            var uang50rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="50000"><img src="img/50rb.png" width="100%"></div>';
+            var uang75rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="75000"><img src="img/75rb.png" width="100%"></div>';
+            var uang100rb = '<div style="box-shadow:0 0 6px rgba(0,0,0,.9);"><input class="es" type="hidden" value="100000"><img src="img/100rb.png" width="100%"></div>';
 
-          var daftarUang = [uang5rb, uang25rp, uang10rb, uang25rp2, uang50rp, uang75rb, uang50rp1, uang100rp, uang1rb, uang20rb, uang1rb1, uang2rb, uang5rb1, uang2rb1, uang10rb1, uang20rb1, uang50rb, uang100rb, uang25rp1, uang100rp1];
-          var valueUang = [5000, 25, 10000, 25, 50, 75000, 50, 100, 1000, 20000, 1000, 2000, 5000, 2000, 10000, 20000, 50000, 100000, 25, 100];
-          var uangRandom = Math.floor(Math.random() * 20);
+            var daftarUang = [uang5rb, uang25rp, uang10rb, uang25rp2, uang50rp, uang75rb, uang50rp1, uang100rp, uang1rb, uang20rb, uang1rb1, uang2rb, uang5rb1, uang2rb1, uang10rb1, uang20rb1, uang50rb, uang100rb, uang25rp1, uang100rp1];
+            var valueUang = [5000, 25, 10000, 25, 50, 75000, 50, 100, 1000, 20000, 1000, 2000, 5000, 2000, 10000, 20000, 50000, 100000, 25, 100];
+            var uangRandom = Math.floor(Math.random() * 20);
 
             var pickUang = Number($('.es').val());
             $('.targetcari').html(daftarUang[uangRandom]);
             $('.jumlahKlik').html('Hasil : Rp <span style="color:green;font-weight:bold;">'+ (rubah(jumlahKlik = jumlahKlik + pickUang))+'</span>');
-            $('.targetcari').css('transition','.3s');
+            $('.kotakpembatas').css("pointer-events", "auto");
+          }, 2500);
+          setTimeout(function() {
+            $('.targetcari').css('transition','.2s');
           }, 2600);
           
         });
