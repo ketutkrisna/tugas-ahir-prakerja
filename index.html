@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <title>Game Prakerja</title>
+    <title>Game uang kaget</title>
     <style>
       body {
         overflow: hidden;
@@ -158,7 +159,7 @@
   <body>
 
     <div class="container text-center mt-4 mb-2">
-      <h4>Tugas Ahir</h4>
+      <h4>UANG KAGET</h4>
     </div>
     <div class="container">
     <div class="d-flex justify-content-between" style="text-align: center;">
@@ -213,8 +214,11 @@
       <div class="targetcari"></div>
     </div>
 
-      <div class="row">
-      <span class="text-center">Create by : Ketut Krisna</span>
+      <div class="row mt-3">
+      <span class="text-center d-flex align-items-center justify-content-center">Developer : 
+        <a class="text-success" href="https://api.whatsapp.com/send?phone=6282179471533"><i class="bi bi-whatsapp text-success me-1 ms-1" style="font-weight:bold;font-size:25px;"></i></a>
+        <a href="https://www.facebook.com/ketut.k.ii/"><i class="bi bi-facebook text-primary me-1 ms-1" style="font-weight:bold;font-size:25px;"></i></a>
+      </span>
       </div>
     </div>
 
@@ -238,12 +242,21 @@
         var jumlahKlik = 0;
         var waktu = $('.pilihMenit').val();
         $('.targetcari').hide();
-        $('.hitungWaktu').text('Waktu : '+waktu+' detik');
+
+        var jumlahmenit='1 menit';
+        $('.hitungWaktu').text('Waktu : '+jumlahmenit);
         $('.jumlahKlik').text('Hasil : Rp 0');
 
         $('.pilihMenit').on('change',function(){
           waktu=$('.pilihMenit').val();
-          $('.hitungWaktu').text('Waktu : '+(waktu)+' detik');
+          if(waktu == 15){
+            jumlahmenit = '15 detik';
+          }else if(waktu == 30){
+            jumlahmenit='30 detik';
+          }else{
+            jumlahmenit=(waktu/60);
+          }
+          $('.hitungWaktu').text('Waktu : '+(jumlahmenit)+' menit');
         });
 
         $('.mulai').on('click',function(){
@@ -294,55 +307,33 @@
 
 
 
-          // var jam=new Date().getTime();
+          
           // var timejs=jam.toString().substring(0,jam.toString().length-3);
+          
+          // var waktutujuan=(Number(timejs)+120000);
 
           // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
           // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
           // console.log(timejs);
 
 
-           
-          // var setDetik = 61;
-          // var minWaktu = 0;
-          var setWaktu = setInterval(function(){
-            waktu--;
-            // setDetik--;
-            // var infomenit = Math.floor(waktu / 60);
-            // var infowaktu;
-            // if(waktu < 60){
-            //   infowaktu = '';
-            //   infomenit = '';
-            //   setDetik = waktu;
-            // }else if(waktu >= 60 && waktu <= 3600){
-            //   infowaktu = 'menit';
-            //   infomenit = Math.floor(waktu / 60);
-            //   if(setDetik <= 1){
-            //     minWaktu=minWaktu+1;
-            //     console.log(minWaktu);
-            //     setDetik = 60 + minWaktu;
-            //     console.log(setDetik);
-            //   }else{
-            //   }
-            // }
-
-            
-            // if(infomenit == 0){
-              
-            // }else{
-            //   infomenit = '';
-            // }
-
-            if(waktu > 10){
+          var seconds = waktu;
+          var countdownTimer = setInterval(function(){
+            var minutes = Math.round((seconds - 30)/60);
+            var remainingSeconds = seconds % 60;
+            if (remainingSeconds < 10) {
+              remainingSeconds = "0" + remainingSeconds; 
+              $('.hitungWaktu').html('Waktu : <span style="color:red;font-weight:bold;">'+minutes + " : " + remainingSeconds+'</span>');
               $('.textcontainer').fadeOut();
               $('.targetcari').show();
-              // $('.hitungWaktu').text('Waktu : '+infomenit+' '+infowaktu+' '+setDetik+' detik');
-              $('.hitungWaktu').text('Waktu : '+waktu+' detik');
-            }else if(waktu < 11 && waktu >=0){
-              $('.hitungWaktu').html('Waktu : <span style="color:red;font-weight:bold;">'+waktu+' detik</span>');
             }else{
-              // clearInterval(detikRun);
-              clearInterval(setWaktu);
+              $('.hitungWaktu').html('Waktu : <span class="merahtime" style="font-weight:bold;">'+minutes + " : " + remainingSeconds+'</span>');
+              $('.textcontainer').fadeOut();
+              $('.targetcari').show();
+            }
+            if (seconds == 0) {
+              clearInterval(countdownTimer);
+              // clearInterval(setWaktu);
               $('.textcontainer').fadeIn();
               $('.textcontainer').text('SELESAI!!!');
               setTimeout(function() {
@@ -354,8 +345,50 @@
               $('.pilihMenit').removeAttr('disabled');
               $('.hitungWaktu').html('Waktu : <span style="color:red;font-weight:bold;">Habis!</span>');
               $('.targetcari').hide();
+            } else {
+              seconds--;
             }
-          },1000);
+          }, 1000);
+
+
+          // var jamtujuan=new Date().getTime();
+          // var timejstujuan=jamtujuan.toString().substring(0,jamtujuan.toString().length-3);
+          // var waktutujuan = (Number(timejstujuan)+15);
+
+          // var setWaktu = setInterval(function(){
+          //   waktu--;
+
+          //   var jam=new Date().getTime();
+          //   var timejs=jam.toString().substring(0,jam.toString().length-3);
+          //   console.log(timejs);
+
+          //   if(timejs>waktutujuan){
+          //     console.log('berhasil');
+          //   }
+
+          //   if(waktu > 10){
+          //     $('.textcontainer').fadeOut();
+          //     $('.targetcari').show();
+          //     // $('.hitungWaktu').text('Waktu : '+infomenit+' '+infowaktu+' '+setDetik+' detik');
+          //     $('.hitungWaktu').text('Waktu : '+waktu+' detik');
+          //   }else if(waktu < 11 && waktu >=0){
+          //     $('.hitungWaktu').html('Waktu : <span style="color:red;font-weight:bold;">'+waktu+' detik</span>');
+          //   }else{
+          //     // clearInterval(detikRun);
+          //     clearInterval(setWaktu);
+          //     $('.textcontainer').fadeIn();
+          //     $('.textcontainer').text('SELESAI!!!');
+          //     setTimeout(function() {
+          //       $('.textcontainer').fadeOut();
+          //     }, 800);
+          //     $('.start').text('Ulangi');
+          //     $('.start').addClass('mulai');
+          //     $('.start').removeClass('disabled');
+          //     $('.pilihMenit').removeAttr('disabled');
+          //     $('.hitungWaktu').html('Waktu : <span style="color:red;font-weight:bold;">Habis!</span>');
+          //     $('.targetcari').hide();
+          //   }
+          // },1000);
 
         });
 
