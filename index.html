@@ -4,12 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <title>Game uang kaget</title>
     <style>
       body {
-        overflow: hidden;
+        /*overflow: hidden;*/
+        /*background-color: black*/
       }
       .stopklik {
         width: 100%;
@@ -23,8 +25,10 @@
       .kotakpembatas {
         width: 100%;
         height: 75vh;
-        background:linear-gradient(#eee,#bbb);
-        cursor:pointer;
+        background:#cdcdcd;
+        /*background-color:#67656e;*/
+        /*cursor: url('img/500rp4.png') 50 50 ,auto;*/
+        cursor: pointer;
         box-shadow:0 0 9px rgba(0,0,0,.8);
         border-radius:10px;
         position:relative;
@@ -33,25 +37,52 @@
         width:158px;
         height:230px;
         background-image:url(img/sasukekun3.png);
-        transition:2s;
+        transition:.1s;
         position:relative;
+        z-index:3;
       }
       .sasukeright {
         width:158px;
         height:230px;
         background-image:url(img/sasukekun3.png);
-        animation: runright .4s steps(5) infinite;
-        transition:2s;
+        animation: runright .25s steps(5) infinite;
+        transition:.1s;
         position:relative;
+        z-index:3;
       }
       .sasukeleft {
         width:158px;
         height:230px;
         background-image:url(img/sasukekun3.png);
-        animation: runleft .4s steps(5) infinite;
-        transition:2s;
+        animation: runleft .25s steps(5) infinite;
+        transition:.1s;
+        position:relative;
+        z-index:3;
+      }
+
+     /* .sasuke {
+        width:140px;
+        height:150px;
+        background-image:url(img/gelinding.png);
+        transition:.1s;
         position:relative;
       }
+      .sasukeright {
+        width:140px;
+        height:150px;
+        background-image:url(img/gelinding.png);
+        animation: runright .25s steps(4) infinite;
+        transition:.1s;
+        position:relative;
+      }
+      .sasukeleft {
+        width:140px;
+        height:150px;
+        background-image:url(img/gelinding.png);
+        animation: runleft .25s steps(4) infinite;
+        transition:.1s;
+        position:relative;
+      }*/
 
       .tipegerak {
         display: flex;
@@ -78,11 +109,12 @@
         /*background-color: #e02b2b;*/
         position: absolute;
         opacity: 0;
+        z-index: 4;
         /*box-shadow:0 0 9px rgba(0,0,0,.6);*/
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: .3s;
+        transition: .1s;
         padding:0;
       }
       .targetcariklik {
@@ -100,7 +132,7 @@
         /*background-color: #e02b2b;*/
         position: absolute;
         opacity: 1;
-        transition: .2s;
+        transition: .1s;
         /*box-shadow:0 0 9px rgba(0,0,0,.6);*/
         transform : scale(1.2);
         padding:0;
@@ -154,6 +186,23 @@
           background-position: 0 210px;
         }
       }
+
+      /*@keyframes runright {
+        0%{
+          background-position: 0 0;
+        }
+        100%{
+          background-position: -600px 0px;
+        }
+      }
+      @keyframes runleft {
+        0%{
+          background-position: -600px 150px;
+        }
+        100%{
+          background-position: 0 150px;
+        }
+      }*/
     </style>
   </head>
   <body>
@@ -204,14 +253,79 @@
 
     </div>
 
+    <style>
+      .kamera {
+        width:300px;
+        height:300px;
+        border-radius:50%;
+        z-index:4;
+        position: absolute;
+        background-image: url('img/bgbelakang1.jpg');
+        background-size:cover;
+        background-repeat:no-repeat;
+        background-attachment:fixed;
+        top:0;
+       /* right:0;
+        bottom:0;*/
+        left:0;
+        /*background-color: red;*/
+      }
+      .kamerabox {
+        z-index:4;
+        position:absolute;
+        height:100%;
+        width:100%;
+        top:0;
+        left:0;
+        background-color:black;
+        /*right:0;
+        bottom:0;
+        left:0;*/
+        /*background-color: red;*/
+      }
+      .cobaaja {
+        position: absolute;
+        height:100%;
+        width:100%;
+        top: 0;
+        /*background-color: #dedede;*/
+        background-image: url('img/bgbelakang2.png');
+        background-size: cover;
+        clip-path: circle(80px at center);
+        border-radius:10px;
+        box-shadow: 2px 2px 4px rgba(0,0,0,.6);
+        z-index: 4;
+      }
+      /*.transparent-div {
+  width: 300px;
+  height: 200px;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background-clip: content-box;
+  background-position: center;
+  position: relative;
+}*/
+    </style>
+
     <div class="kotakpembatas">
       <div class="pembungkustimeklik">
         <span class="hitungWaktu"></span>
         <span class="jumlahKlik"></span>
       </div>
       <div class="textcontainer">MULAI!!!</div>
-      <div class="sasuke" data-aos="zoom-in-down" data-aos-duration="3000"></div>
-      <div class="targetcari"></div>
+      <div class="sasuke" data-aos="zoom-in-down" data-aos-duration="1500"></div>
+      <!-- <h1>KONTOL</h1> -->
+      <div class="cobaaja">
+        <div class="pembungkustimeklik">
+          <span class="hitungWaktu"></span>
+          <span class="jumlahKlik"></span>
+        </div>
+        <div class="targetcari"></div>
+      </div>
+      <!-- <div class="kamerabox">
+        <h1 style="top:100px;left:0;position:fixed;overflow:hidden;">anjay lah</h1>
+        <div class="kamera">
+      </div>
+      </div> -->
     </div>
 
       <div class="row mt-3">
@@ -224,8 +338,27 @@
       </div>
     </div>
 
+    <!-- <audio class="audioklik" src="sound/klik.wav" type="audio/wav"></audio> -->
+    <audio id="audioklik">
+      <source src="sound/klik.wav" type="audio/wav">
+    </audio>
+    <audio id="dropcoin">
+      <source src="sound/dropcoin.wav" type="audio/wav">
+    </audio>
+
+   <!--  <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <div class="transparent-div"></div>
+        </div>
+      </div>
+    </div> -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" src="bootstrap/js/bootstrap.bundle.js"></script> -->
+    <!-- <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script type="text/javascript" src="bootstrap/js/jquery-3.2.1.min.js"></script> -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init();
@@ -240,6 +373,7 @@
          return ribuan;
         }
         // console.clear();
+
 
         var jumlahKlik = 0;
         var waktu = $('.pilihMenit').val();
@@ -405,6 +539,7 @@
         });
 
 
+        var dropcoin=document.getElementById('dropcoin');
         var klick = 0;
         $('.targetcari').on('click',function(e){
           klick++;
@@ -456,10 +591,12 @@
             $('.targetcari').html(daftarUang[uangRandom]);
             $('.jumlahKlik').html('Hasil : Rp <span style="color:green;font-weight:bold;">'+ (rubah(jumlahKlik = jumlahKlik + pickUang))+'</span>');
             $('.kotakpembatas').css("pointer-events", "auto");
-          }, 2500);
+            $('#dropcoin')[0].play();
+            dropcoin.currentTime = 0;
+          }, 1400);
           setTimeout(function() {
             $('.targetcari').css('transition','.2s');
-          }, 2600);
+          }, 1500);
           
         });
 
@@ -469,24 +606,61 @@
         var posAwal=0;
         var posAwalY=0;
 
-        $('.kotakpembatas').on('click',function(e){
+        // $('.kamerabox').on('mousemove',function(e){
+        //   $('.kamera').css({
+        //     'left':e.pageX-155,
+        //     'top':e.pageY-130
+        //   })
+        // })
+        var audioklik=document.getElementById('audioklik');
+        $('.kotakpembatas').on('click',function(){
+          $('#audioklik')[0].play();
+          audioklik.currentTime = 0;
+        })
+
+        // $('.kamerabox').on('mousemove',function(e){
+        //   $('.kamera').css({
+        //     'left':(e.pageX-250),
+        //     'top':(e.pageY-250)
+        //   })
+        // })
+
+        $('.kotakpembatas').on('mousemove',function(e){
           var parentOffset = $(this).parent().offset(); 
           var posX = e.pageX - parentOffset.left;
           var posY = e.pageY - parentOffset.top;
+          var posXf = Math.floor(posX);
+          var posYf = Math.floor(posY);
+
+          $('.cobaaja').css('clip-path','circle(80px at '+(posX-10)+'px '+(posY-35)+'px)')
+
+          // console.log(topPosition+'=='+(posY+35))
+
+          var elemen = $('.sasuke');
+          var elemenPosisi = elemen.position();
+
+          // Mendapatkan nilai translate dari style elemen
+          var elemenTranslateX = parseInt(elemen.css('transform').split(',')[4], 10);
+          var elemenTranslateY = parseInt(elemen.css('transform').split(',')[5], 10);
+          // Menggabungkan nilai posisi dan translate untuk mendapatkan posisi akhir
+          var elemenPosisiX = elemenPosisi.left + elemenTranslateX;
+          var elemenPosisiY = elemenPosisi.top + elemenTranslateY;
+          var elemenPosisiXf = Math.floor(elemenPosisiX);
+          var elemenPosisiYf = Math.floor(elemenPosisiY);
           var pilihTipe = $('.pilihTipe').val();
           if(pilihTipe == 'gerakLari'){
             $('.sasuke').css('transform','translate('+ (posX-100) +'px ,'+ (posY-110) +'px)');
           }else{
             setTimeout(function() {
               $('.sasuke').css('transform','translate('+ (posX-100) +'px ,'+ (posY-110) +'px)');
-            }, 1500);
+            }, 500);
           }
-          pengkondisian(posX, posY, pilihTipe);
+          pengkondisian(posXf, posYf, pilihTipe, elemenTranslateX);
         });
 
-        function pengkondisian(posX, posY, pilihTipe){
+        function pengkondisian(posX, posY, pilihTipe, elemenTranslateX){
           if(pilihTipe == 'gerakLari'){
-            if(posX > posAwal){
+            if(posX > elemenTranslateX){
               posAwal = posX;
               $('.sasuke').addClass('sasukeright');
               $('.sasuke').removeClass('sasukeleft');
@@ -495,7 +669,7 @@
                 if(posAwal == posX){
                   $('.sasuke').css('animation-play-state','paused');
                 }
-              }, 2000);
+              }, 1300);
             }else{
               posAwal = posX;
               $('.sasuke').addClass('sasukeleft');
@@ -505,7 +679,7 @@
                 if(posAwal == posX){
                   $('.sasuke').css('animation-play-state','paused');
                 }
-              }, 2000);
+              }, 1400);
             }
           }else{
             if(posX > posAwal){
@@ -523,7 +697,7 @@
               }, 1400);
               setTimeout(function() {
                 $('.sasuke').css('animation-play-state','paused');
-              }, 1600);
+              }, 1400);
             }else{
               posAwal = posX;
               $('.sasuke').fadeOut(200);
@@ -539,7 +713,115 @@
               }, 1400);
               setTimeout(function() {
                 $('.sasuke').css('animation-play-state','paused');
-              }, 1600);
+              }, 1400);
+            }
+          }
+        }
+
+
+        $('.kotakpembatas').on('touchmove',function(e){
+          var parentOffset = $(this).parent().offset(); 
+          var posX = e.touches[0].pageX - parentOffset.left;
+          var posY = e.touches[0].pageY - parentOffset.top;
+          var posXf = Math.floor(posX);
+          var posYf = Math.floor(posY);
+
+
+          var targetDiv = $('.targetcari');
+          var targetpos = targetDiv.offset();
+          var topPosition = targetpos.top;
+          var leftPosition = targetpos.left;
+
+          $('.cobaaja').css('clip-path','circle(80px at '+(posX-10)+'px '+(posY-35)+'px)')
+
+          if((posX+65)>=leftPosition && (posX+65)<=(leftPosition+90)){
+            if((posY+35)>=topPosition && (posY+35)<=(topPosition+90)){
+              $('.targetcari').fadeIn();
+              $('.targetcari').css('opacity','1')
+            }else{
+              $('.targetcari').fadeOut();
+              $('.targetcari').css('opacity','1')
+            }
+          }
+ 
+          var elemen = $('.sasuke');
+          var elemenPosisi = elemen.position();
+
+          // Mendapatkan nilai translate dari style elemen
+          var elemenTranslateX = parseInt(elemen.css('transform').split(',')[4], 10);
+          var elemenTranslateY = parseInt(elemen.css('transform').split(',')[5], 10);
+          // Menggabungkan nilai posisi dan translate untuk mendapatkan posisi akhir
+          var elemenPosisiX = elemenPosisi.left + elemenTranslateX;
+          var elemenPosisiY = elemenPosisi.top + elemenTranslateY;
+          var elemenPosisiXf = Math.floor(elemenPosisiX);
+          var elemenPosisiYf = Math.floor(elemenPosisiY);
+          var pilihTipe = $('.pilihTipe').val();
+          if(pilihTipe == 'gerakLari'){
+            $('.sasuke').css('transform','translate('+ (posX-100) +'px ,'+ (posY-110) +'px)');
+          }else{
+            setTimeout(function() {
+              $('.sasuke').css('transform','translate('+ (posX-100) +'px ,'+ (posY-110) +'px)');
+            }, 500);
+          }
+          pengkondisian(posXf, posYf, pilihTipe, elemenTranslateX);
+        });
+
+        function pengkondisian(posX, posY, pilihTipe, elemenTranslateX){
+          if(pilihTipe == 'gerakLari'){
+            if(posX > elemenTranslateX){
+              posAwal = posX;
+              $('.sasuke').addClass('sasukeright');
+              $('.sasuke').removeClass('sasukeleft');
+              $('.sasuke').css('animation-play-state','running');
+              setTimeout(function() {
+                if(posAwal == posX){
+                  $('.sasuke').css('animation-play-state','paused');
+                }
+              }, 1300);
+            }else{
+              posAwal = posX;
+              $('.sasuke').addClass('sasukeleft');
+              $('.sasuke').removeClass('sasukeright');
+              $('.sasuke').css('animation-play-state','running');
+              setTimeout(function() {
+                if(posAwal == posX){
+                  $('.sasuke').css('animation-play-state','paused');
+                }
+              }, 1400);
+            }
+          }else{
+            if(posX > posAwal){
+              posAwal = posX;
+              $('.sasuke').fadeOut(200);
+              $('.sasuke').css('animation-play-state','running');
+                $('.sasuke').addClass('sasukeright');
+                $('.sasuke').removeClass('sasukeleft');
+              setTimeout(function() {
+                $('.sasuke').fadeIn(200);
+                $('.sasuke').css('animation-play-state','paused');
+              }, 200);
+              setTimeout(function() {
+                $('.sasuke').css('animation-play-state','running');
+              }, 1400);
+              setTimeout(function() {
+                $('.sasuke').css('animation-play-state','paused');
+              }, 1400);
+            }else{
+              posAwal = posX;
+              $('.sasuke').fadeOut(200);
+              $('.sasuke').css('animation-play-state','running');
+                $('.sasuke').addClass('sasukeleft');
+                $('.sasuke').removeClass('sasukeright');
+              setTimeout(function() {
+                $('.sasuke').fadeIn(200);
+                $('.sasuke').css('animation-play-state','paused');
+              }, 200);
+              setTimeout(function() {
+                $('.sasuke').css('animation-play-state','running');
+              }, 1400);
+              setTimeout(function() {
+                $('.sasuke').css('animation-play-state','paused');
+              }, 1400);
             }
           }
         }
