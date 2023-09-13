@@ -155,6 +155,9 @@
       .start {
         box-shadow:0 0 9px rgba(0,0,0,.6);
       }
+      .fullview {
+        box-shadow:0 0 9px rgba(0,0,0,.6);
+      }
       .textcontainer {
         position:absolute;
         left:0;
@@ -214,6 +217,7 @@
     <div class="d-flex justify-content-between" style="text-align: center;">
       <div>
         <button class="btn-sm btn btn-primary start mulai mb-2">Mulai</button>
+        <button class="btn-sm btn btn-warning fullview mb-2 fw-bold">Fullscreen</button>
       </div>
       
       
@@ -306,15 +310,15 @@
 }*/
     </style>
 
-    <div class="kotakpembatas">
+    <div class="kotakpembatas" id="kotakpembatas">
       <div class="pembungkustimeklik">
         <span class="hitungWaktu"></span>
         <span class="jumlahKlik"></span>
       </div>
       <div class="textcontainer">MULAI!!!</div>
-      <div class="sasuke" data-aos="zoom-in-down" data-aos-duration="1500"></div>
+      <div class="sasuke" id="sasuke" data-aos="zoom-in-down" data-aos-duration="1500"></div>
       <!-- <h1>KONTOL</h1> -->
-      <div class="cobaaja">
+      <div class="cobaaja" id="cobaaja">
         <div class="pembungkustimeklik">
           <span class="hitungWaktu"></span>
           <span class="jumlahKlik"></span>
@@ -373,6 +377,34 @@
          return ribuan;
         }
         // console.clear();
+        function toggleFullScreen(element) {
+          if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+            if (element.requestFullscreen) {
+              element.requestFullscreen();
+            } else if (element.msRequestFullscreen) {
+              element.msRequestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+              element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) {
+              element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
+          } else {
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            } else if (document.msExitFullscreen) {
+              document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+              document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+              document.webkitExitFullscreen();
+            }
+          }
+        }
+
+        var gede=document.querySelector('.kotakpembatas');
+        $('.fullview').on('click',function(){
+          toggleFullScreen(gede);
+        })
 
 
         var jumlahKlik = 0;
@@ -398,7 +430,6 @@
         $('.mulai').on('click',function(){
           waktu = $('.pilihMenit').val();
           jumlahKlik=0;
-
 
           $('.pilihMenit').attr('disabled','of');
           setTimeout(function() {
@@ -606,24 +637,11 @@
         var posAwal=0;
         var posAwalY=0;
 
-        // $('.kamerabox').on('mousemove',function(e){
-        //   $('.kamera').css({
-        //     'left':e.pageX-155,
-        //     'top':e.pageY-130
-        //   })
-        // })
         var audioklik=document.getElementById('audioklik');
         $('.kotakpembatas').on('click',function(){
           $('#audioklik')[0].play();
           audioklik.currentTime = 0;
         })
-
-        // $('.kamerabox').on('mousemove',function(e){
-        //   $('.kamera').css({
-        //     'left':(e.pageX-250),
-        //     'top':(e.pageY-250)
-        //   })
-        // })
 
         $('.kotakpembatas').on('mousemove',function(e){
           var parentOffset = $(this).parent().offset(); 
@@ -632,9 +650,17 @@
           var posXf = Math.floor(posX);
           var posYf = Math.floor(posY);
 
-          $('.cobaaja').css('clip-path','circle(80px at '+(posX-10)+'px '+(posY-35)+'px)')
+          var circleDiv = document.getElementById('cobaaja');
+          var sasukepos = document.getElementById('sasuke');
+          var xx = e.clientX;
+          var yy = e.clientY;
 
-          // console.log(topPosition+'=='+(posY+35))
+          if (document.fullscreenElement) {
+            circleDiv.style.clipPath = `circle(80px at ${xx}px ${yy}px)`;
+          } else {
+            $('.cobaaja').css('clip-path','circle(80px at '+(posX-10)+'px '+(posY-35)+'px)')
+          }
+
 
           var elemen = $('.sasuke');
           var elemenPosisi = elemen.position();
@@ -649,7 +675,11 @@
           var elemenPosisiYf = Math.floor(elemenPosisiY);
           var pilihTipe = $('.pilihTipe').val();
           if(pilihTipe == 'gerakLari'){
-            $('.sasuke').css('transform','translate('+ (posX-100) +'px ,'+ (posY-110) +'px)');
+            if (document.fullscreenElement) {
+              sasukepos.style.transform = 'translate('+ (xx-60) +'px ,'+ (yy-80) +'px)';
+            } else {
+              $('.sasuke').css('transform','translate('+ (posX-100) +'px ,'+ (posY-110) +'px)');
+            }
           }else{
             setTimeout(function() {
               $('.sasuke').css('transform','translate('+ (posX-100) +'px ,'+ (posY-110) +'px)');
@@ -732,7 +762,16 @@
           var topPosition = targetpos.top;
           var leftPosition = targetpos.left;
 
-          $('.cobaaja').css('clip-path','circle(80px at '+(posX-10)+'px '+(posY-35)+'px)')
+          var circleDiv = document.getElementById('cobaaja');
+          var sasukepos = document.getElementById('sasuke');
+          var xx = e.touches[0].pageX;
+          var yy = e.touches[0].pageY;
+
+          if (document.fullscreenElement) {
+            $('.cobaaja').css('clip-path','circle(80px at '+(xx)+'px '+(yy)+'px)')
+          } else {
+            $('.cobaaja').css('clip-path','circle(80px at '+(posX-10)+'px '+(posY-35)+'px)')
+          }
 
           if((posX+65)>=leftPosition && (posX+65)<=(leftPosition+90)){
             if((posY+35)>=topPosition && (posY+35)<=(topPosition+90)){
@@ -757,7 +796,11 @@
           var elemenPosisiYf = Math.floor(elemenPosisiY);
           var pilihTipe = $('.pilihTipe').val();
           if(pilihTipe == 'gerakLari'){
-            $('.sasuke').css('transform','translate('+ (posX-100) +'px ,'+ (posY-110) +'px)');
+            if (document.fullscreenElement) {
+              sasukepos.style.transform = 'translate('+ (xx-60) +'px ,'+ (yy-80) +'px)';
+            } else {
+              $('.sasuke').css('transform','translate('+ (posX-100) +'px ,'+ (posY-110) +'px)');
+            }
           }else{
             setTimeout(function() {
               $('.sasuke').css('transform','translate('+ (posX-100) +'px ,'+ (posY-110) +'px)');
